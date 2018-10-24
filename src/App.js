@@ -12,7 +12,7 @@ class Header extends Component {
 class Timer extends Component {
   render() {
     return (
-      <h2> Timer and stuff </h2>
+      <h2 className="body"> Timer and stuff </h2>
     );
   }
 }
@@ -20,7 +20,7 @@ class Timer extends Component {
 class Footer extends Component {
   render() {
     return (
-      <h3> Footer and stuff </h3>
+      <h3 className="footer"> Footer and stuff </h3>
     );
   }
 }
