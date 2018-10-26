@@ -6,6 +6,7 @@ class Header extends Component {
   return (
     <div>
       <h1 className="header"> Pomodoro </h1>
+      <h3 className="header1"> GET SHIT DONE </h3>
     </div>
     );
   }
@@ -14,7 +15,7 @@ class Header extends Component {
 class Timer extends Component {
   state = {
     play: false,
-    timeLeft: 10,
+    time: 10,
   };
 
   alert() {
@@ -25,7 +26,7 @@ class Timer extends Component {
     if (this.state.play === true) {
         setInterval(() => {
           this.setState((prevState) => {
-          return { timeLeft: prevState.timeLeft - 1};
+          return { time: prevState.time - 1};
         })
       }, 1000);
     }
@@ -39,13 +40,14 @@ class Timer extends Component {
     this.setState({
       play: true,
     })
-    console.log(this.state.play);
+    console.log(this.state);
   }
 
   clickPause = () => {
     this.setState({
       play: false,
     })
+    console.log(this.state);
   }
 
   
@@ -54,7 +56,7 @@ class Timer extends Component {
     return (
       <div className="body">
         <h2 className="bodyTitle"> Timer and stuff </h2>
-        <div>Time remaining: {this.state.timeLeft} </div>
+        <div>Time remaining: {this.state.time} </div>
         <button onClick={this.clickPlay}> Play </button> <button onClick={this.clickPause} > Pause </button>
       </div>
     );
@@ -63,12 +65,12 @@ class Timer extends Component {
 
 class Footer extends Component {
   state = {
-    currentTime: new Date(),
+    currentDate: new Date(),
   };
   
   componentDidMount() {
     setInterval(() => {
-      this.setState({ currentTime: new Date() })
+      this.setState({ currentDate: new Date() })
     }, 1000);
   }
 
