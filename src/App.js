@@ -13,30 +13,47 @@ class Header extends Component {
 }
 
 class Timer extends Component {
-  state = {
+  constructor() {
+  super();
+  this.state = {
     play: false,
     time: 10,
   };
-
-  alert() {
-    console.log('Good job! take a break')
-  }
-
-  elapseTime() {
-    if (this.state.play === true) {
-        setInterval(() => {
-          this.setState((prevState) => {
-          return { time: prevState.time - 1};
-        })
-      }, 1000);
-    }
   }
 
   componentDidMount() {
     this.elapseTime();
   }
 
+  alert() {
+    console.log('Good job! take a break')
+  }
+
+  elapseTime() {
+    if (this.state.time === 0) {
+      this.reset(0);
+      this.alert();
+    }
+    if (this.state.play === true) {
+      let newState = this.state.time - 1;
+      this.setState({time: newState});
+    }
+  }
+
+  reset(resetFor = this.state.time) {
+    clearInterval(this.interval);
+    let time = resetFor;
+    this.setState({play: false});
+  }
+
+  restartInterval(){
+    clearInterval(this.interval);
+    this.interval = setInterval(this.elapseTime, 1000);
+  }
+
   clickPlay = () => {
+    this.restartInterval();
+
     this.setState({
       play: true,
     })
@@ -78,7 +95,7 @@ class Footer extends Component {
     return (
       <div className="footer">
         <h3> Footer and stuff </h3>
-        <p>Time: {this.state.currentTime.toLocaleString()}</p>
+        <p>Time: {this.state.currentDate.toLocaleString()}</p>
       </div>
     );
   }
